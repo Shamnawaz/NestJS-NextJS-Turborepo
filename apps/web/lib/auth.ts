@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { BACKEND_URL } from "./constants";
 import { FormState, loginFormSchema, signupFormSchema } from "./type";
+import { createSession } from "./session";
 
 export async function signUp(state: FormState , formData: FormData ): Promise<FormState> {
     const validationFields = signupFormSchema.safeParse({
@@ -58,7 +59,13 @@ export async function signIn(state: FormState, formData: FormData): Promise<Form
     if(response.ok) {
         const result = await response.json();
         // Create the session for authenticated user
-        console.log({ result });
+        await createSession({
+            user: {
+                id: result.id,
+                name: result.name
+            }
+        })
+        redirect('/');
         
     } else {
         return {

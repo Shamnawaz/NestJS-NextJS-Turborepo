@@ -31,7 +31,7 @@ function SignUpForm() {
             </div>
             {state?.error?.password && (
                 <div className='text-sm text-red-500'>
-                    <p>Password Must :</p>
+                    <p>Password must :</p>
                     <ul>
                         {state.error.password.map((err) => (
                             <li key={err}>{err}</li>
