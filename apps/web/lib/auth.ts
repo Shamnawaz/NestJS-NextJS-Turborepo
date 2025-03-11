@@ -26,7 +26,7 @@ export async function signUp(state: FormState , formData: FormData ): Promise<Fo
     });
 
     if(response.ok) {
-        redirect('/auth/signin');
+        redirect('/auth/login');
     } else {
         return {
             message: response.status === 409 ? "User already registered" : response.statusText

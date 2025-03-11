@@ -21,7 +21,7 @@ function SignUpForm() {
 
             <div>
                 <Label htmlFor="email">Email</Label>
-                <Input id='email' name="name" placeholder='John@example.com' />
+                <Input id='email' name="email" placeholder='John@example.com' />
             </div>
             {state?.error?.email && <p className='text-sm text-red-500'>{state.error.email}</p>}
 
