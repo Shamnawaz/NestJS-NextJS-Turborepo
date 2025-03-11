@@ -23,3 +23,8 @@ export const signupFormSchema = z.object({
         .regex(/[^a-zA-Z0-9]/, { message: "Contains at least on special character." })
         .trim()
 });
+
+export const loginFormSchema = z.object({
+    email: z.string().email({ message: "Please enter a valid email." }),
+    password: z.string().min(1, { message: "Password field must be not empty." }),
+});
