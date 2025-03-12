@@ -9,6 +9,7 @@ function NavBar() {
         <div className='flex gap-3 shadow p-2 text-white'>
             <Link href={"/"}>Home</Link>
             <Link href={"/dashboard"}>Dashboard</Link>
+            <Link href={"/profile"}>Profile</Link>
             <SignInButton />
         </div>
     </div>

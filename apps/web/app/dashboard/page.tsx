@@ -1,6 +1,12 @@
+import { getSession } from '@/lib/session'
+import { redirect } from 'next/navigation';
 import React from 'react'
 
-function Dashboard() {
+async function Dashboard() {
+  const session = await getSession();
+
+  if(!session || !session.user) redirect('/auth/login');
+
   return (
     <div>
       Dashboard
