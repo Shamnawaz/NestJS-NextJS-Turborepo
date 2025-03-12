@@ -25,7 +25,9 @@ export async function createSession(payload: Session) {
         .setExpirationTime(expiredAt)
         .sign(encodedKey);
 
-    cookies().set('session', session, {
+    const cookieStore = cookies();
+
+    cookieStore.set('session', session, {
         httpOnly: true,
         secure: true,
         expires: new Date(expiredAt),
@@ -35,13 +37,13 @@ export async function createSession(payload: Session) {
 }
 
 export async function getSession() {
-    const cookie = cookies().get("session")?.value;
+    const cookie = (await cookies()).get("session")?.value;
     if(!cookie) return null;
 
     try {
 
-        const { payload } = jwtVerify(cookie, encodedKey, {
-            algorithm: ['HS256'],
+        const { payload } = await jwtVerify(cookie, encodedKey, {
+            algorithms: ['HS256'],
         })
 
         return payload as Session;
@@ -50,8 +52,8 @@ export async function getSession() {
         console.error('Failed to verify the session', error);
         redirect('/auth/login');
     }
+}
 
-
-
-    
+export async function deleteSession() {
+    await cookies().delete("session");
 }
