@@ -65,6 +65,7 @@ export async function signIn(state: FormState, formData: FormData): Promise<Form
                 name: result.name
             },
             accessToken: result.accessToken,
+            refreshToken: result.refreshToken
         })
         redirect('/');
         

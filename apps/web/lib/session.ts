@@ -11,7 +11,7 @@ export type Session = {
         name: string
     },
     accessToken: string,
-    // refreshToken: string
+    refreshToken: string
 }
 
 const encodedKey = new TextEncoder().encode(SESSION_SECRET_KEY);
@@ -37,7 +37,7 @@ export async function createSession(payload: Session) {
 }
 
 export async function getSession() {
-    const cookie = (await cookies()).get("session")?.value;
+    const cookie = await cookies().get("session")?.value;
     if(!cookie) return null;
 
     try {
