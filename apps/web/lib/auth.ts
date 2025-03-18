@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { BACKEND_URL } from "./constants";
 import { FormState, loginFormSchema, signupFormSchema } from "./type";
-import { createSession } from "./session";
+import { createSession, updateToken } from "./session";
 
 export async function signUp(state: FormState , formData: FormData ): Promise<FormState> {
     const validationFields = signupFormSchema.safeParse({
@@ -88,8 +88,13 @@ export const refreshToken = async (oldRefreshToken: string) => {
         if(!response.ok) throw new Error('Failed To Refresh Token');
 
         const { accessToken, refreshToken } = await response.json();
+        // Update session with new tokens
+        await updateToken({ accessToken, refreshToken });
 
-    } catch (error) {
-        
+        return accessToken;
+
+    } catch (err) {
+        console.error('refresh Token failed :', err);
+        return null;
     }
 }
