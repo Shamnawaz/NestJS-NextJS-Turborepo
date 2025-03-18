@@ -75,3 +75,21 @@ export async function signIn(state: FormState, formData: FormData): Promise<Form
         }
     }
 }
+
+export const refreshToken = async (oldRefreshToken: string) => {
+    try {
+        const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
+            method: 'POST',
+            body: JSON.stringify({
+                refresh: oldRefreshToken
+            })
+        })
+
+        if(!response.ok) throw new Error('Failed To Refresh Token');
+
+        const { accessToken, refreshToken } = await response.json();
+
+    } catch (error) {
+        
+    }
+}
