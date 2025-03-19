@@ -10,6 +10,7 @@ import placeholder from "assets/placeholder.svg"
 import Link from "next/link"
 import { useActionState } from "react"
 import { signIn } from "@/lib/auth"
+import { BACKEND_URL } from "@/lib/constants";
 
 export function LoginForm({
   className,
@@ -80,7 +81,8 @@ export function LoginForm({
                       fill="currentColor"
                     />
                   </svg>
-                  <span className="sr-only">Login with Google</span>
+                  {/* <span className="sr-only">Login with Google</span> */}
+                  <a className="sr-only" href={`http://localhost:8000/auth/google/login`}>Login With Google</a>
                 </Button>
                 <Button variant="outline" type="button" className="w-full">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
