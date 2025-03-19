@@ -7,7 +7,7 @@ import type { AuthJwtPayload } from "../types/auth-jwt";
 import { AuthService } from "../auth.service";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     constructor(
         @Inject(jwtConfig.KEY) private jwtConfiguration: ConfigType<typeof jwtConfig>,
         private readonly authService: AuthService
